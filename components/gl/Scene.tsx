@@ -5,10 +5,9 @@ import {
   Environment,
   PresentationControls,
 } from "@react-three/drei";
-import { Canvas, type ThreeElements } from "@react-three/fiber";
-import { BoxGeometry } from "three";
-
+import { Canvas } from "@react-three/fiber";
 import { theme } from "@/styles";
+import { HotdogV1 } from "./HotdogV1";
 
 export const Scene = () => {
   return (
@@ -29,7 +28,7 @@ export const Scene = () => {
         polar={[-Math.PI / 3, Math.PI / 3]}
         azimuth={[-Math.PI / 1.4, Math.PI / 2]}
       >
-        <Box position={[0, 0, 0]} />
+        <HotdogV1 />
       </PresentationControls>
       <ContactShadows
         position={[0, -1.4, 0]}
@@ -40,17 +39,5 @@ export const Scene = () => {
       />
       <Environment preset="city" />
     </Canvas>
-  );
-};
-
-type BoxProps = ThreeElements["mesh"] & {
-  fill?: string;
-};
-
-const Box = ({ fill = theme.colors.secondary[60], ...props }: BoxProps) => {
-  return (
-    <mesh geometry={new BoxGeometry(1, 1, 1)} {...props}>
-      <meshStandardMaterial roughness={0} color={fill} />
-    </mesh>
   );
 };
