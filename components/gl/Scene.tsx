@@ -7,7 +7,8 @@ import {
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { theme } from "@/styles";
-import { HotdogV1 } from "./HotdogV1";
+// import { Logo } from "./Logo";
+import { LogoV2 } from "./LogoV2";
 
 export const Scene = () => {
   return (
@@ -28,7 +29,8 @@ export const Scene = () => {
         polar={[-Math.PI / 3, Math.PI / 3]}
         azimuth={[-Math.PI / 1.4, Math.PI / 2]}
       >
-        <HotdogV1 scale={0.5} animationSpeed={2} />
+        {/* <Logo scale={0.5} /> */}
+        <LogoV2 scale={0.5} />
       </PresentationControls>
       <ContactShadows
         position={[0, -1.4, 0]}
@@ -37,7 +39,10 @@ export const Scene = () => {
         blur={3}
         far={4}
       />
-      <Environment preset="city" />
+      <Environment
+        preset="city"
+        // files={"/assets/hdri/Light_Arches_A.hdr"}
+      />
     </Canvas>
   );
 };
