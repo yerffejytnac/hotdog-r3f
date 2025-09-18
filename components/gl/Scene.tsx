@@ -12,7 +12,7 @@ import { HotdogV1 } from "./HotdogV1";
 export const Scene = () => {
   return (
     <Canvas shadows camera={{ position: [0, 0, 10], fov: 25 }}>
-      <color attach="background" args={[theme.colors.primary[90]]} />
+      <color attach="background" args={[theme.colors.primary[80]]} />
       <ambientLight intensity={0.5} />
       <spotLight
         position={[10, 10, 10]}
@@ -28,7 +28,7 @@ export const Scene = () => {
         polar={[-Math.PI / 3, Math.PI / 3]}
         azimuth={[-Math.PI / 1.4, Math.PI / 2]}
       >
-        <HotdogV1 />
+        <HotdogV1 scale={0.5} animationSpeed={2} />
       </PresentationControls>
       <ContactShadows
         position={[0, -1.4, 0]}
