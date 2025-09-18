@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import { Providers } from "@/components";
 
 export const metadata: Metadata = {
-  title: "App",
-  description: "Boilerplate for Next.js",
+  title:
+    "Your one-of-a-kind pet deserves a one-of-a-kind portrait. | Hotdog 🐶📸",
+  description: "Your one-of-a-kind pet deserves a one-of-a-kind portrait.",
 };
 
 export default function RootLayout({
