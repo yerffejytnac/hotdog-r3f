@@ -1,6 +1,5 @@
-"use client";
-
 /** biome-ignore-all lint/complexity/useLiteralKeys: <explanation> */
+"use client";
 
 import { useAnimations, useGLTF } from "@react-three/drei";
 import React, { type JSX, useEffect, useRef } from "react";
@@ -39,19 +38,18 @@ type GLTFResult = GLTF & {
   };
 };
 
-type ActionName = "Scene";
-type GLTFActions = Record<ActionName, THREE.AnimationAction>;
-
 export function HotdogV1(props: JSX.IntrinsicElements["group"]) {
-  const group = useRef<THREE.Group>(undefined);
+  const group = useRef<THREE.Group>(null);
   const { nodes, materials, animations } = useGLTF(
     "./assets/models/hotdog-anim.glb",
-  ) as GLTFResult;
-  const { actions, clips } = useAnimations<GLTFActions>(animations, group);
+  ) as unknown as GLTFResult;
+  const { actions, clips } = useAnimations(animations, group);
   console.log(actions, clips);
 
   useEffect(() => {
-    actions["Scene"]?.play();
+    if (actions.Scene) {
+      actions.Scene.play();
+    }
   }, [actions]);
 
   return (
@@ -152,4 +150,4 @@ export function HotdogV1(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/hotdog-anim.glb");
+useGLTF.preload("./assets/models/hotdog-anim.glb");
