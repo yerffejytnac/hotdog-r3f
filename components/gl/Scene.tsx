@@ -10,7 +10,8 @@ import {
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 // import { Logo } from "./Logo";
-import { LogoV2 } from "./LogoV2";
+// import { LogoV2 } from "./LogoV2";
+import { LogoV3 } from "./LogoV3";
 
 export const Scene = () => {
   return (
@@ -38,7 +39,7 @@ export const Scene = () => {
               floatIntensity={1} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
               floatingRange={[-0.1, 0.1]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
             >
-              <LogoV2 />
+              <LogoV3 />
             </Float>
           </PresentationControls>
         </Center>
