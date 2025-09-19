@@ -15,7 +15,23 @@ import { LogoV3 } from "./LogoV3";
 
 export const Scene = () => {
   return (
-    <Canvas shadows>
+    <Canvas
+      shadows
+      gl={{
+        precision: "highp",
+        powerPreference: "high-performance",
+        // Disable MSAA when DPR is high to avoid redundant work
+        antialias: true,
+        alpha: true,
+      }}
+      dpr={[1, 2]}
+      orthographic
+      // camera={{ position: [0, 0, 5000], near: 0.001, far: 10000, zoom: 1 }}
+      // frameloop="never"
+      linear
+      flat
+      resize={{ scroll: false, debounce: { scroll: 0, resize: 500 } }}
+    >
       <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={40} />
       <ambientLight intensity={0.5} />
       <spotLight
@@ -25,7 +41,7 @@ export const Scene = () => {
         shadow-mapSize={1024}
         castShadow
       />
-      <Bounds fit observe margin={1}>
+      <Bounds fit observe margin={1.25}>
         <Center>
           <PresentationControls
             global
@@ -52,7 +68,11 @@ export const Scene = () => {
         far={5}
         resolution={1024}
       />
-      <Environment preset="studio" />
+      <Environment
+        // preset="studio"
+        // background
+        files={"/assets/hdri/Light_Arches_A.hdr"}
+      />
     </Canvas>
   );
 };

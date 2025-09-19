@@ -22,7 +22,7 @@ const styles = css`
   body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
-    background-color: ${theme.colors.primary[80]};
+    background-color: ${theme.colors.neutral[10]};
     color: ${theme.colors.neutral[10]};
     font-family: ${theme.fonts.body};
     font-weight: ${theme.fontWeights.medium};

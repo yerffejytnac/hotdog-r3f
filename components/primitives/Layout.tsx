@@ -25,6 +25,20 @@ const Root = styled.div<Props>`
   ${flexbox}
   ${grid}
   ${space}
+
+
+  position: fixed;
+  inset: 0;
+  max-height: 100vh;
+  max-width: 100vw;
+  pointer-events: none;
+
+  canvas {
+    /* biome-ignore lint: idk ask Clement */
+    width: 100% !important;
+    /* biome-ignore lint: idk ask Clement */
+    height: 100% !important;
+  }
 `;
 
 export const Layout = ({ children, ...rest }: Props) => (

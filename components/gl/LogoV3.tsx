@@ -6,6 +6,7 @@ import React, {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from "react";
 import * as THREE from "three";
@@ -42,9 +43,6 @@ type GLTFResult = GLTF & {
   };
 };
 
-type ActionName = "Scene";
-type GLTFActions = Record<ActionName, THREE.AnimationAction>;
-
 export interface LogoV3Props extends React.ComponentProps<"group"> {
   animationSpeed?: number;
   playOnMount?: boolean;
@@ -62,10 +60,32 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
   ref: ForwardedRef<LogoV3Ref>,
 ) {
   const group = useRef<THREE.Group>(null);
-  const { nodes, materials, animations } = useGLTF(
+  const { nodes, animations } = useGLTF(
     "/assets/models/hotdog-v3-compressed-custom-meshopt.glb",
   ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
+
+  // Create realistic glass material
+  const glassMaterial = useMemo(() => {
+    return new THREE.MeshPhysicalMaterial({
+      transmission: 1, // Full transparency for glass
+      opacity: 1, // Full opacity (transmission handles transparency)
+      transparent: true, // Enable transparency
+      roughness: 0, // Perfectly smooth surface for sharp reflections
+      metalness: 0, // Glass is not metallic
+      ior: 1.5, // Standard glass index of refraction
+      thickness: 0.5, // Glass thickness affects refraction
+      envMapIntensity: 1, // Full environment reflections
+      clearcoat: 1, // Adds extra reflective layer
+      clearcoatRoughness: 0, // Sharp clearcoat reflections
+      side: THREE.DoubleSide, // Render both sides
+      color: new THREE.Color(0xffffff), // Pure white base
+      attenuationColor: new THREE.Color(0xffffff), // Clear glass (no tint)
+      attenuationDistance: 10, // How far light travels through
+      specularIntensity: 1, // Full specular reflections
+      specularColor: new THREE.Color(0xffffff), // White specular highlights
+    });
+  }, []);
 
   useImperativeHandle(
     ref,
@@ -153,7 +173,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="D1_1"
           geometry={nodes.D1_1.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.D1_1.skeleton}
           morphTargetDictionary={nodes.D1_1.morphTargetDictionary}
           morphTargetInfluences={nodes.D1_1.morphTargetInfluences}
@@ -163,7 +183,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="D2_1"
           geometry={nodes.D2_1.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.D2_1.skeleton}
           morphTargetDictionary={nodes.D2_1.morphTargetDictionary}
           morphTargetInfluences={nodes.D2_1.morphTargetInfluences}
@@ -173,7 +193,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="G1_1"
           geometry={nodes.G1_1.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.G1_1.skeleton}
           morphTargetDictionary={nodes.G1_1.morphTargetDictionary}
           morphTargetInfluences={nodes.G1_1.morphTargetInfluences}
@@ -183,7 +203,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="G2_1"
           geometry={nodes.G2_1.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.G2_1.skeleton}
           morphTargetDictionary={nodes.G2_1.morphTargetDictionary}
           morphTargetInfluences={nodes.G2_1.morphTargetInfluences}
@@ -193,7 +213,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="H1_1"
           geometry={nodes.H1_1.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.H1_1.skeleton}
           position={[-1.778, 0.441, 0.218]}
           userData={{ name: "H1" }}
@@ -201,7 +221,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="h2"
           geometry={nodes.h2.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.h2.skeleton}
           morphTargetDictionary={nodes.h2.morphTargetDictionary}
           morphTargetInfluences={nodes.h2.morphTargetInfluences}
@@ -211,7 +231,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="H3"
           geometry={nodes.H3.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.H3.skeleton}
           morphTargetDictionary={nodes.H3.morphTargetDictionary}
           morphTargetInfluences={nodes.H3.morphTargetInfluences}
@@ -221,7 +241,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="O2_1"
           geometry={nodes.O2_1.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.O2_1.skeleton}
           morphTargetDictionary={nodes.O2_1.morphTargetDictionary}
           morphTargetInfluences={nodes.O2_1.morphTargetInfluences}
@@ -231,7 +251,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="T1_1"
           geometry={nodes.T1_1.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.T1_1.skeleton}
           morphTargetDictionary={nodes.T1_1.morphTargetDictionary}
           morphTargetInfluences={nodes.T1_1.morphTargetInfluences}
@@ -241,7 +261,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="T2_1"
           geometry={nodes.T2_1.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.T2_1.skeleton}
           morphTargetDictionary={nodes.T2_1.morphTargetDictionary}
           morphTargetInfluences={nodes.T2_1.morphTargetInfluences}
@@ -251,7 +271,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
         <skinnedMesh
           name="O1"
           geometry={nodes.O1.geometry}
-          material={materials.White}
+          material={glassMaterial}
           skeleton={nodes.O1.skeleton}
           morphTargetDictionary={nodes.O1.morphTargetDictionary}
           morphTargetInfluences={nodes.O1.morphTargetInfluences}
