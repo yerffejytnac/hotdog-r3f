@@ -1,19 +1,37 @@
 "use client";
 
-import {
-  ContactShadows,
-  Environment,
-  PresentationControls,
-} from "@react-three/drei";
+import { Bounds, Center, ContactShadows, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { Suspense, useEffect, useState } from "react";
 import { theme } from "@/styles";
-// import { Logo } from "./Logo";
 import { LogoV2 } from "./LogoV2";
+
+// Animated logo wrapper component
+const AnimatedLogo = ({ ...props }: React.ComponentProps<typeof LogoV2>) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [playOnMount, setPlayOnMount] = useState(false);
+
+  useEffect(() => {
+    console.log("AnimatedLogo mounted");
+    // Wait a bit for bounds to settle, then start animation
+    const timer = setTimeout(() => {
+      console.log("Setting visible");
+      setIsVisible(true);
+      // Enable animation after visibility
+      setTimeout(() => {
+        console.log("Setting playOnMount to true");
+        setPlayOnMount(true);
+      }, 50);
+    }, 300); // Slightly longer delay to ensure bounds are calculated
+    return () => clearTimeout(timer);
+  }, []); // Empty deps - run once on mount
+
+  return <LogoV2 playOnMount={playOnMount} visible={isVisible} {...props} />;
+};
 
 export const Scene = () => {
   return (
     <Canvas shadows camera={{ position: [0, 0, 10], fov: 25 }}>
-      <color attach="background" args={[theme.colors.primary[80]]} />
       <ambientLight intensity={0.5} />
       <spotLight
         position={[10, 10, 10]}
@@ -22,18 +40,15 @@ export const Scene = () => {
         shadow-mapSize={2048}
         castShadow
       />
-      <PresentationControls
-        global
-        snap={true}
-        rotation={[0, 0.3, 0]}
-        polar={[-Math.PI / 3, Math.PI / 3]}
-        azimuth={[-Math.PI / 1.4, Math.PI / 2]}
-      >
-        {/* <Logo scale={0.5} /> */}
-        <LogoV2 scale={0.5} />
-      </PresentationControls>
+      <Suspense fallback={null}>
+        <Bounds fit observe margin={1.5}>
+          <Center>
+            <AnimatedLogo />
+          </Center>
+        </Bounds>
+      </Suspense>
       <ContactShadows
-        position={[0, -1.4, 0]}
+        position={[0, -2, 0]}
         opacity={0.75}
         scale={10}
         blur={3}

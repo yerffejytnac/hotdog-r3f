@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/complexity/useLiteralKeys: <explanation> */
+/** biome-ignore-all lint/complexity/useLiteralKeys: GLTF node names use numeric keys */
 "use client";
 
 import { useAnimations, useGLTF } from "@react-three/drei";
@@ -42,9 +42,6 @@ type GLTFResult = GLTF & {
     White: THREE.MeshStandardMaterial;
   };
 };
-
-type ActionName = "Scene";
-type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
 export interface LogoV2Props extends React.ComponentProps<"group"> {
   animationSpeed?: number;
@@ -98,34 +95,58 @@ export const LogoV2 = forwardRef<LogoV2Ref, LogoV2Props>(function Logo(
     }
   }, [actions, animationSpeed]);
 
+  // Initial setup effect
   useEffect(() => {
     if (actions.Scene) {
-      actions.Scene.setLoop(THREE.LoopOnce, 1);
-      actions.Scene.clampWhenFinished = true;
+      const action = actions.Scene;
+      const mixer = action.getMixer();
+
+      // Configure the animation
+      action.setLoop(THREE.LoopOnce, 1);
+      action.clampWhenFinished = true;
+
+      // Reset animation to start
+      action.reset();
+      action.time = 0;
+      action.enabled = true;
+      action.setEffectiveWeight(1.0);
+
+      // Force update the mixer to apply frame 0
+      mixer.update(0);
+
+      // Pause the animation at frame 0 instead of stopping it
+      action.paused = true;
 
       const handleFinished = () => {
         onAnimationComplete?.();
       };
 
-      actions.Scene.getMixer().addEventListener("finished", handleFinished);
-
-      if (playOnMount) {
-        actions.Scene.play();
-      }
+      mixer.addEventListener("finished", handleFinished);
 
       return () => {
-        if (actions.Scene) {
-          actions.Scene.getMixer().removeEventListener(
-            "finished",
-            handleFinished,
-          );
-        }
+        mixer.removeEventListener("finished", handleFinished);
       };
     }
-  }, [actions, playOnMount, onAnimationComplete]);
+  }, [actions, onAnimationComplete]);
+
+  // Separate effect to handle playOnMount changes
+  useEffect(() => {
+    console.log(
+      "LogoV2 playOnMount effect - playOnMount:",
+      playOnMount,
+      "actions.Scene:",
+      !!actions.Scene,
+    );
+    if (actions.Scene && playOnMount) {
+      console.log("Playing animation now!");
+      actions.Scene.paused = false;
+      actions.Scene.play();
+    }
+  }, [actions, playOnMount]);
 
   return (
     <group ref={group} {...props} dispose={null}>
+      {/* Wrapper group to normalize positioning for Bounds component */}
       <group name="Scene">
         <group name="Armature" position={[-1.778, 0.441, 0.218]}>
           <primitive object={nodes.H1} />

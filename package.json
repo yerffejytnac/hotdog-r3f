@@ -11,6 +11,7 @@
     "nuke": "rm -rf ./node_modules && rm -rf .next"
   },
   "dependencies": {
+    "@react-spring/three": "^10.0.3",
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.3.0",
     "@types/three": "^0.179.0",
