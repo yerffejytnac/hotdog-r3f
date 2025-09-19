@@ -21,7 +21,7 @@ export const Scene = () => {
         position={[10, 10, 10]}
         angle={0.15}
         penumbra={1}
-        shadow-mapSize={2048}
+        shadow-mapSize={1024}
         castShadow
       />
       <Bounds fit observe margin={1.5}>
@@ -48,7 +48,7 @@ export const Scene = () => {
         position={[0, -2.4, 0]}
         opacity={0.75}
         blur={5}
-        far={10}
+        far={5}
         resolution={1024}
       />
       <Environment
