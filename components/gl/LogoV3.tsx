@@ -72,7 +72,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
       opacity: 1, // Full opacity (transmission handles transparency)
       transparent: true, // Enable transparency
       roughness: 0.05, // Slightly rough for better light interaction
-      metalness: 0.75, // Slight metalness for better reflections
+      metalness: 0.1, // Slight metalness for better reflections
       ior: 1.45, // Glass index of refraction
       thickness: 1, // Thinner glass for better light transmission
       envMapIntensity: 0.75, // Reduced to let direct lights show more
