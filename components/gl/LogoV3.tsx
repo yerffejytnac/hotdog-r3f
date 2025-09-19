@@ -65,25 +65,14 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
   ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
-  // Create realistic glass material
+  // Create a chrome-like material that will show light reflections clearly
   const glassMaterial = useMemo(() => {
-    return new THREE.MeshPhysicalMaterial({
-      transmission: 1, // Full transparency for glass
-      opacity: 1, // Full opacity (transmission handles transparency)
-      transparent: true, // Enable transparency
-      roughness: 0, // Perfectly smooth surface for sharp reflections
-      metalness: 0, // Glass is not metallic
-      ior: 1.5, // Standard glass index of refraction
-      thickness: 0.5, // Glass thickness affects refraction
-      envMapIntensity: 1, // Full environment reflections
-      clearcoat: 1, // Adds extra reflective layer
-      clearcoatRoughness: 0, // Sharp clearcoat reflections
-      side: THREE.DoubleSide, // Render both sides
-      color: new THREE.Color(0xffffff), // Pure white base
-      attenuationColor: new THREE.Color(0xffffff), // Clear glass (no tint)
-      attenuationDistance: 10, // How far light travels through
-      specularIntensity: 1, // Full specular reflections
-      specularColor: new THREE.Color(0xffffff), // White specular highlights
+    return new THREE.MeshStandardMaterial({
+      color: new THREE.Color(0xffffff),
+      metalness: 1,
+      roughness: 0,
+      envMapIntensity: 1,
+      side: THREE.DoubleSide,
     });
   }, []);
 
