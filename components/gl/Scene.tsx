@@ -13,8 +13,10 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import type * as THREE from "three";
+import * as THREE from "three";
 
+import { Frame } from "./frame/frame";
+import { FRAME_MODELS, SAMPLE_IMAGES } from "./frame/frame-constants";
 import { LogoV3 } from "./LogoV3";
 
 // Animated lights for dynamic reflections
@@ -53,7 +55,7 @@ const AnimatedLights = () => {
         position={[3, 2, 3]}
         angle={0.5}
         penumbra={0.5}
-        intensity={20}
+        intensity={10}
         color="#ffffff"
         castShadow
         shadow-mapSize={1024}
@@ -61,14 +63,14 @@ const AnimatedLights = () => {
       <pointLight
         ref={light2Ref}
         position={[-2.5, 1, -2.5]}
-        intensity={15}
-        color="#cecece"
+        intensity={5}
+        color="#ffffff"
       />
       <pointLight
         ref={light3Ref}
         position={[0, 2, 0]}
-        intensity={15}
-        color="#d4d4d4"
+        intensity={5}
+        color="#ffffff"
       />
     </>
   );
@@ -86,13 +88,14 @@ export const Scene = () => {
         // antialias: true,
         alpha: true,
         reversedDepthBuffer: true,
+        outputColorSpace: THREE.SRGBColorSpace,
       }}
       // dpr={[1, 2]}
       // orthographic
       // camera={{ position: [0, 0, 5000], near: 0.001, far: 10000, zoom: 1 }}
       // frameloop="never"
       linear
-      // flat
+      flat
       resize={{ scroll: false, debounce: { scroll: 0, resize: 500 } }}
     >
       <OrbitControls
@@ -111,7 +114,31 @@ export const Scene = () => {
         far={10000.0}
       />
       <ambientLight intensity={0.5} />
-      <AnimatedLights />
+      {/* <AnimatedLights /> */}
+      <Frame
+        scale={0.25 as any}
+        position={[-2.25, -0.75, -7.5]}
+        emissiveIntensity={0}
+        paperType="glossy"
+        image={SAMPLE_IMAGES.Radar}
+        frameModel={FRAME_MODELS["Natural Oak"]}
+      />
+      <Frame
+        scale={0.25 as any}
+        position={[2.375, -0.75, -7.5]}
+        emissiveIntensity={0}
+        paperType="glossy"
+        image={SAMPLE_IMAGES.Maggie}
+        frameModel={FRAME_MODELS["Walnut"]}
+      />
+      <Frame
+        scale={0.25 as any}
+        position={[7, -0.75, -7.5]}
+        emissiveIntensity={0}
+        paperType="glossy"
+        image={SAMPLE_IMAGES.Ruckus}
+        frameModel={FRAME_MODELS["Natural Oak"]}
+      />
       <Bounds fit observe margin={1.5}>
         <Center>
           <Float
@@ -124,13 +151,7 @@ export const Scene = () => {
           </Float>
         </Center>
       </Bounds>
-      <ContactShadows
-        position={[0, -2.4, 0]}
-        opacity={0.75}
-        blur={5}
-        far={5}
-        resolution={1024}
-      />
+      {/* <ContactShadows position={[0, -2.4, 0]} opacity={0.75} blur={5} far={5} /> */}
       <Environment
         files="/assets/hdri/Light_Arches_A.hdr"
         backgroundIntensity={0.125}
