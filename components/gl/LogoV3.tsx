@@ -72,19 +72,19 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
       opacity: 1, // Full opacity (transmission handles transparency)
       transparent: true, // Enable transparency
       roughness: 0.05, // Slightly rough for better light interaction
-      metalness: 0.1, // Slight metalness for better reflections
+      metalness: 0.25, // Slight metalness for better reflections
       ior: 1.45, // Glass index of refraction
-      thickness: 1, // Thinner glass for better light transmission
+      thickness: 0.25, // Thinner glass for better light transmission
       envMapIntensity: 0.75, // Reduced to let direct lights show more
       clearcoat: 0.5, // Moderate clearcoat
-      clearcoatRoughness: 0.25, // Slightly rough clearcoat
+      clearcoatRoughness: 0.1, // Slightly rough clearcoat
       side: THREE.FrontSide, // Render both sides
       color: new THREE.Color(0xffffff), // Pure white base
       attenuationColor: new THREE.Color(0xffffff), // Clear glass (no tint)
-      attenuationDistance: 10, // Shorter distance for more visible effect
+      attenuationDistance: 100, // Shorter distance for more visible effect
       specularIntensity: 1, // Full specular reflections
       specularColor: new THREE.Color(0xffffff), // White specular highlights
-      reflectivity: 0.1, // High reflectivity for lights
+      reflectivity: 0.25, // High reflectivity for lights
     });
   }, []);
 

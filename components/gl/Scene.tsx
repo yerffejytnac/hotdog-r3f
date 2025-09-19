@@ -139,7 +139,7 @@ export const Scene = () => {
         image={SAMPLE_IMAGES.Ruckus}
         frameModel={FRAME_MODELS["Natural Oak"]}
       />
-      <Bounds fit observe margin={1.5}>
+      <Bounds fit observe margin={1}>
         <Center>
           <Float
             speed={2}
