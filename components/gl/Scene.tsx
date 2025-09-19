@@ -52,22 +52,22 @@ const AnimatedLights = () => {
         position={[3, 2, 3]}
         angle={0.5}
         penumbra={0.5}
-        intensity={25}
-        color="#FFA500" // Orange for warm highlights
+        intensity={20}
+        color="#ff0066"
         castShadow
         shadow-mapSize={1024}
       />
       <pointLight
         ref={light2Ref}
         position={[-2.5, 1, -2.5]}
-        intensity={20}
-        color="#FFD700" // Gold light
+        intensity={15}
+        color="#00ffff"
       />
       <pointLight
         ref={light3Ref}
         position={[0, 2, 0]}
         intensity={15}
-        color="#FFF8DC" // Cornsilk - very warm white
+        color="#ffff00"
       />
     </>
   );
@@ -103,13 +103,13 @@ export const Scene = () => {
       <PerspectiveCamera
         makeDefault
         position={[0, 0, 5]}
-        fov={40}
+        fov={50}
         near={0.001}
         far={1000}
       />
-      <ambientLight intensity={0.2} color="#FFE4B5" />
+      <ambientLight intensity={0.5} />
       <AnimatedLights />
-      <Bounds fit observe margin={1.25}>
+      <Bounds fit observe margin={1.5}>
         <Center>
           <Float
             speed={1}
@@ -128,11 +128,12 @@ export const Scene = () => {
         far={5}
         resolution={1024}
       />
+      {/* Temporarily disabled to debug light reflections
       <Environment
         files="/assets/hdri/Light_Arches_A.hdr"
-        backgroundIntensity={0.1}
-        environmentIntensity={0.2}
-      />
+        backgroundIntensity={0.2}
+        environmentIntensity={0.3}
+      /> */}
     </Canvas>
   );
 };

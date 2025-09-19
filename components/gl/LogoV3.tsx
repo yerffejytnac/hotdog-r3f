@@ -65,22 +65,39 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
   ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
-  // Create a luxurious gold material with warm metallic properties
+  // Create realistic glass material
   const glassMaterial = useMemo(() => {
     return new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(0xffd700), // Gold color
-      metalness: 1,
-      roughness: 0.2, // Slight roughness for realistic gold
-      envMapIntensity: 0.8,
-      side: THREE.DoubleSide,
-      clearcoat: 0.3, // Adds a lacquered finish
-      clearcoatRoughness: 0.1,
-      reflectivity: 0.9,
-      sheen: 0.5, // Adds fabric-like sheen
-      sheenColor: new THREE.Color(0xffa500), // Orange sheen
-      sheenRoughness: 0.3,
+      transmission: 0.95, // Slightly less than full transparency
+      opacity: 1, // Full opacity (transmission handles transparency)
+      transparent: true, // Enable transparency
+      roughness: 0.05, // Slightly rough for better light interaction
+      metalness: 0.75, // Slight metalness for better reflections
+      ior: 1.45, // Glass index of refraction
+      thickness: 0.5, // Thinner glass for better light transmission
+      envMapIntensity: 0.75, // Reduced to let direct lights show more
+      clearcoat: 0.5, // Moderate clearcoat
+      clearcoatRoughness: 0.1, // Slightly rough clearcoat
+      side: THREE.FrontSide, // Render both sides
+      color: new THREE.Color(0xffffff), // Pure white base
+      attenuationColor: new THREE.Color(0xffffff), // Clear glass (no tint)
+      attenuationDistance: 50, // Shorter distance for more visible effect
+      specularIntensity: 1, // Full specular reflections
+      specularColor: new THREE.Color(0xffffff), // White specular highlights
+      reflectivity: 0.1, // High reflectivity for lights
     });
   }, []);
+
+  // Create a chrome-like material that will show light reflections clearly
+  // const glassMaterial = useMemo(() => {
+  //   return new THREE.MeshStandardMaterial({
+  //     color: new THREE.Color(0xffffff),
+  //     metalness: 1,
+  //     roughness: 0,
+  //     envMapIntensity: 1,
+  //     side: THREE.DoubleSide,
+  //   });
+  // }, []);
 
   useImperativeHandle(
     ref,
