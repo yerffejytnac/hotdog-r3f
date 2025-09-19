@@ -10,68 +10,9 @@ import {
   PerspectiveCamera,
   PresentationControls,
 } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
-import type * as THREE from "three";
+import { Canvas } from "@react-three/fiber";
 
 import { LogoV3 } from "./LogoV3";
-
-// Animated lights for dynamic reflections
-const AnimatedLights = () => {
-  const light1Ref = useRef<THREE.SpotLight>(null);
-  const light2Ref = useRef<THREE.PointLight>(null);
-  const light3Ref = useRef<THREE.PointLight>(null);
-
-  useFrame((state) => {
-    const time = state.clock.elapsedTime;
-
-    // Animate spotlight position in a circle - closer to model
-    if (light1Ref.current) {
-      light1Ref.current.position.x = Math.cos(time * 0.5) * 3;
-      light1Ref.current.position.z = Math.sin(time * 0.5) * 3;
-      light1Ref.current.position.y = 2;
-    }
-
-    // Animate point light position in opposite circle
-    if (light2Ref.current) {
-      light2Ref.current.position.x = Math.cos(time * 0.7 + Math.PI) * 2.5;
-      light2Ref.current.position.y = Math.sin(time * 0.3) * 1 + 1;
-      light2Ref.current.position.z = Math.sin(time * 0.7 + Math.PI) * 2.5;
-    }
-
-    // Animate third light vertically
-    if (light3Ref.current) {
-      light3Ref.current.position.y = Math.sin(time * 0.4) * 2 + 2;
-    }
-  });
-
-  return (
-    <>
-      <spotLight
-        ref={light1Ref}
-        position={[3, 2, 3]}
-        angle={0.5}
-        penumbra={0.5}
-        intensity={20}
-        color="#ff0066"
-        castShadow
-        shadow-mapSize={1024}
-      />
-      <pointLight
-        ref={light2Ref}
-        position={[-2.5, 1, -2.5]}
-        intensity={15}
-        color="#00ffff"
-      />
-      <pointLight
-        ref={light3Ref}
-        position={[0, 2, 0]}
-        intensity={15}
-        color="#ffff00"
-      />
-    </>
-  );
-};
 
 export const Scene = () => {
   return (
@@ -107,10 +48,23 @@ export const Scene = () => {
         near={0.001}
         far={1000}
       />
-      <ambientLight intensity={0.1} />
-      <AnimatedLights />
+      <ambientLight intensity={0.5} />
+      <spotLight
+        position={[10, 10, 10]}
+        angle={0.15}
+        penumbra={1}
+        shadow-mapSize={1024}
+        castShadow
+      />
       <Bounds fit observe margin={1.25}>
         <Center>
+          {/* <PresentationControls
+            global
+            snap={true}
+            rotation={[0, 0, 0]}
+            polar={[-Math.PI / 3, Math.PI / 3]}
+            azimuth={[-Math.PI / 1.4, Math.PI / 2]}
+          > */}
           <Float
             speed={1}
             rotationIntensity={1}
@@ -119,6 +73,7 @@ export const Scene = () => {
           >
             <LogoV3 />
           </Float>
+          {/* </PresentationControls> */}
         </Center>
       </Bounds>
       <ContactShadows
@@ -128,12 +83,11 @@ export const Scene = () => {
         far={5}
         resolution={1024}
       />
-      {/* Temporarily disabled to debug light reflections
       <Environment
-        files="/assets/hdri/Light_Arches_A.hdr"
-        backgroundIntensity={0.2}
-        environmentIntensity={0.3}
-      /> */}
+        // preset="studio"
+        // background
+        files={"/assets/hdri/Light_Arches_A.hdr"}
+      />
     </Canvas>
   );
 };
