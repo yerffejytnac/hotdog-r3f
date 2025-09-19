@@ -85,6 +85,7 @@ export const Scene = () => {
         // Disable MSAA when DPR is high to avoid redundant work
         // antialias: true,
         alpha: true,
+        reversedDepthBuffer: true,
       }}
       // dpr={[1, 2]}
       // orthographic
