@@ -45,25 +45,25 @@ type GLTFResult = GLTF & {
 type ActionName = "Scene";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-export interface LogoV3Props extends React.ComponentProps<"group"> {
+export interface LogoV4Props extends React.ComponentProps<"group"> {
   animationSpeed?: number;
   playOnMount?: boolean;
   onAnimationComplete?: () => void;
 }
 
-export interface LogoV3Ref {
+export interface LogoV4Ref {
   play: () => void;
   stop: () => void;
   reset: () => void;
 }
 
-export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
+export const LogoV4 = forwardRef<LogoV4Ref, LogoV4Props>(function Logo(
   { animationSpeed = 1.25, playOnMount = true, onAnimationComplete, ...props },
-  ref: ForwardedRef<LogoV3Ref>,
+  ref: ForwardedRef<LogoV4Ref>,
 ) {
   const group = useRef<THREE.Group>(null);
   const { nodes, materials, animations } = useGLTF(
-    "/assets/models/hotdog-v3-compressed-custom-meshopt.glb",
+    "/assets/models/hotdog-v3-original-center-resample-meshopt.glb",
   ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
@@ -128,7 +128,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
       <group name="Scene">
         <group
           name="Armature"
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ name: "Armature" }}
         >
           <primitive object={nodes.H1} />
@@ -143,13 +143,6 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           <primitive object={nodes.G_main} />
           <primitive object={nodes.H2_5044} />
         </group>
-        <group
-          name="Armature001"
-          position={[-3.695, 0.112, 0.218]}
-          userData={{ name: "Armature.001" }}
-        >
-          <primitive object={nodes.O_main2_1} />
-        </group>
         <skinnedMesh
           name="D1_1"
           geometry={nodes.D1_1.geometry}
@@ -157,7 +150,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.D1_1.skeleton}
           morphTargetDictionary={nodes.D1_1.morphTargetDictionary}
           morphTargetInfluences={nodes.D1_1.morphTargetInfluences}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "D1" }}
         />
         <skinnedMesh
@@ -167,7 +160,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.D2_1.skeleton}
           morphTargetDictionary={nodes.D2_1.morphTargetDictionary}
           morphTargetInfluences={nodes.D2_1.morphTargetInfluences}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "D2" }}
         />
         <skinnedMesh
@@ -177,7 +170,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.G1_1.skeleton}
           morphTargetDictionary={nodes.G1_1.morphTargetDictionary}
           morphTargetInfluences={nodes.G1_1.morphTargetInfluences}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "G1" }}
         />
         <skinnedMesh
@@ -187,7 +180,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.G2_1.skeleton}
           morphTargetDictionary={nodes.G2_1.morphTargetDictionary}
           morphTargetInfluences={nodes.G2_1.morphTargetInfluences}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "G2" }}
         />
         <skinnedMesh
@@ -195,7 +188,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           geometry={nodes.H1_1.geometry}
           material={materials.White}
           skeleton={nodes.H1_1.skeleton}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ name: "H1" }}
         />
         <skinnedMesh
@@ -205,7 +198,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.h2.skeleton}
           morphTargetDictionary={nodes.h2.morphTargetDictionary}
           morphTargetInfluences={nodes.h2.morphTargetInfluences}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "h2" }}
         />
         <skinnedMesh
@@ -215,7 +208,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.H3.skeleton}
           morphTargetDictionary={nodes.H3.morphTargetDictionary}
           morphTargetInfluences={nodes.H3.morphTargetInfluences}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "H3" }}
         />
         <skinnedMesh
@@ -225,7 +218,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.O2_1.skeleton}
           morphTargetDictionary={nodes.O2_1.morphTargetDictionary}
           morphTargetInfluences={nodes.O2_1.morphTargetInfluences}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "O2" }}
         />
         <skinnedMesh
@@ -235,7 +228,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.T1_1.skeleton}
           morphTargetDictionary={nodes.T1_1.morphTargetDictionary}
           morphTargetInfluences={nodes.T1_1.morphTargetInfluences}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "T1" }}
         />
         <skinnedMesh
@@ -245,9 +238,16 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.T2_1.skeleton}
           morphTargetDictionary={nodes.T2_1.morphTargetDictionary}
           morphTargetInfluences={nodes.T2_1.morphTargetInfluences}
-          position={[-1.778, 0.441, 0.218]}
+          position={[0.508, -0.009, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "T2" }}
         />
+        <group
+          name="Armature001"
+          position={[-1.409, -0.338, -0.206]}
+          userData={{ name: "Armature.001" }}
+        >
+          <primitive object={nodes.O_main2_1} />
+        </group>
         <skinnedMesh
           name="O1"
           geometry={nodes.O1.geometry}
@@ -255,7 +255,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.O1.skeleton}
           morphTargetDictionary={nodes.O1.morphTargetDictionary}
           morphTargetInfluences={nodes.O1.morphTargetInfluences}
-          position={[-3.695, 0.112, 0.218]}
+          position={[-1.409, -0.338, -0.206]}
           userData={{ targetNames: ["Key 1"], name: "O1" }}
         />
       </group>
@@ -263,4 +263,6 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
   );
 });
 
-useGLTF.preload("/assets/models/hotdog-v3-compressed-custom-meshopt.glb");
+useGLTF.preload(
+  "/assets/models/hotdog-v3-original-center-resample-meshopt.glb",
+);
