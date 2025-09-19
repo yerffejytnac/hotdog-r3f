@@ -54,7 +54,7 @@ const AnimatedLights = () => {
         angle={0.5}
         penumbra={0.5}
         intensity={20}
-        color="#ff0066"
+        color="#ffffff"
         castShadow
         shadow-mapSize={1024}
       />
@@ -62,13 +62,13 @@ const AnimatedLights = () => {
         ref={light2Ref}
         position={[-2.5, 1, -2.5]}
         intensity={15}
-        color="#00ffff"
+        color="#cecece"
       />
       <pointLight
         ref={light3Ref}
         position={[0, 2, 0]}
         intensity={15}
-        color="#ffff00"
+        color="#d4d4d4"
       />
     </>
   );
@@ -132,8 +132,8 @@ export const Scene = () => {
       />
       <Environment
         files="/assets/hdri/Light_Arches_A.hdr"
-        backgroundIntensity={0.2}
-        environmentIntensity={0.125}
+        backgroundIntensity={0.125}
+        // environmentIntensity={0.375}
       />
     </Canvas>
   );
