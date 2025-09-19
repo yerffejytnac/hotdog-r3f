@@ -35,7 +35,7 @@ export const Scene = () => {
         shadow-mapSize={1024}
         castShadow
       />
-      <Bounds fit observe margin={1.5}>
+      <Bounds fit observe margin={1}>
         <Center>
           {/* <PresentationControls
             global
