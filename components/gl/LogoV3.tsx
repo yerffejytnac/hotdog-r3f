@@ -65,14 +65,20 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
   ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
-  // Create a chrome-like material that will show light reflections clearly
+  // Create a luxurious gold material with warm metallic properties
   const glassMaterial = useMemo(() => {
-    return new THREE.MeshStandardMaterial({
-      color: new THREE.Color(0xffffff),
+    return new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(0xffd700), // Gold color
       metalness: 1,
-      roughness: 0,
-      envMapIntensity: 1,
+      roughness: 0.2, // Slight roughness for realistic gold
+      envMapIntensity: 0.8,
       side: THREE.DoubleSide,
+      clearcoat: 0.3, // Adds a lacquered finish
+      clearcoatRoughness: 0.1,
+      reflectivity: 0.9,
+      sheen: 0.5, // Adds fabric-like sheen
+      sheenColor: new THREE.Color(0xffa500), // Orange sheen
+      sheenRoughness: 0.3,
     });
   }, []);
 
