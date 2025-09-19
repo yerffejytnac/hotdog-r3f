@@ -6,6 +6,7 @@ import {
   ContactShadows,
   Environment,
   Float,
+  Lightformer,
   OrbitControls,
   PerspectiveCamera,
   PresentationControls,
@@ -80,12 +81,13 @@ export const Scene = () => {
       gl={{
         precision: "highp",
         powerPreference: "high-performance",
+        // localClippingEnabled: false
         // Disable MSAA when DPR is high to avoid redundant work
         // antialias: true,
         alpha: true,
       }}
       // dpr={[1, 2]}
-      orthographic
+      // orthographic
       // camera={{ position: [0, 0, 5000], near: 0.001, far: 10000, zoom: 1 }}
       // frameloop="never"
       linear
@@ -102,20 +104,20 @@ export const Scene = () => {
       />
       <PerspectiveCamera
         makeDefault
-        position={[0, 0, 5]}
+        position={[0, 0, 300]}
         fov={50}
         near={0.001}
-        far={1000}
+        far={10000.0}
       />
       <ambientLight intensity={0.5} />
       <AnimatedLights />
       <Bounds fit observe margin={1.5}>
         <Center>
           <Float
-            speed={1}
-            rotationIntensity={1}
-            floatIntensity={1}
-            floatingRange={[-0.25, 0.25]}
+            speed={2}
+            rotationIntensity={0.5}
+            floatIntensity={0.5}
+            floatingRange={[-0.25, 0.125]}
           >
             <LogoV3 />
           </Float>
@@ -128,12 +130,11 @@ export const Scene = () => {
         far={5}
         resolution={1024}
       />
-      {/* Temporarily disabled to debug light reflections
       <Environment
         files="/assets/hdri/Light_Arches_A.hdr"
         backgroundIntensity={0.2}
-        environmentIntensity={0.3}
-      /> */}
+        environmentIntensity={0.125}
+      />
     </Canvas>
   );
 };

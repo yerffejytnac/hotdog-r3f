@@ -74,14 +74,14 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
       roughness: 0.05, // Slightly rough for better light interaction
       metalness: 0.75, // Slight metalness for better reflections
       ior: 1.45, // Glass index of refraction
-      thickness: 0.5, // Thinner glass for better light transmission
+      thickness: 1, // Thinner glass for better light transmission
       envMapIntensity: 0.75, // Reduced to let direct lights show more
       clearcoat: 0.5, // Moderate clearcoat
-      clearcoatRoughness: 0.1, // Slightly rough clearcoat
+      clearcoatRoughness: 0.25, // Slightly rough clearcoat
       side: THREE.FrontSide, // Render both sides
       color: new THREE.Color(0xffffff), // Pure white base
       attenuationColor: new THREE.Color(0xffffff), // Clear glass (no tint)
-      attenuationDistance: 50, // Shorter distance for more visible effect
+      attenuationDistance: 10, // Shorter distance for more visible effect
       specularIntensity: 1, // Full specular reflections
       specularColor: new THREE.Color(0xffffff), // White specular highlights
       reflectivity: 0.1, // High reflectivity for lights
@@ -191,6 +191,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.D1_1.morphTargetInfluences}
           position={[-1.778, 0.441, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "D1" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="D2_1"
@@ -201,6 +202,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.D2_1.morphTargetInfluences}
           position={[-1.778, 0.441, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "D2" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="G1_1"
@@ -211,6 +213,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.G1_1.morphTargetInfluences}
           position={[-1.778, 0.441, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "G1" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="G2_1"
@@ -221,6 +224,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.G2_1.morphTargetInfluences}
           position={[-1.778, 0.441, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "G2" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="H1_1"
@@ -229,6 +233,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           skeleton={nodes.H1_1.skeleton}
           position={[-1.778, 0.441, 0.218]}
           userData={{ name: "H1" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="h2"
@@ -239,6 +244,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.h2.morphTargetInfluences}
           position={[-1.778, 0.441, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "h2" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="H3"
@@ -249,6 +255,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.H3.morphTargetInfluences}
           position={[-1.778, 0.441, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "H3" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="O2_1"
@@ -259,6 +266,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.O2_1.morphTargetInfluences}
           position={[-1.778, 0.441, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "O2" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="T1_1"
@@ -269,6 +277,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.T1_1.morphTargetInfluences}
           position={[-1.778, 0.441, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "T1" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="T2_1"
@@ -279,6 +288,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.T2_1.morphTargetInfluences}
           position={[-1.778, 0.441, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "T2" }}
+          frustumCulled={false}
         />
         <skinnedMesh
           name="O1"
@@ -289,6 +299,7 @@ export const LogoV3 = forwardRef<LogoV3Ref, LogoV3Props>(function Logo(
           morphTargetInfluences={nodes.O1.morphTargetInfluences}
           position={[-3.695, 0.112, 0.218]}
           userData={{ targetNames: ["Key 1"], name: "O1" }}
+          frustumCulled={false}
         />
       </group>
     </group>
